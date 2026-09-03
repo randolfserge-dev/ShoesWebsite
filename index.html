@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D0D0D">
+  <title>Le Flame Snkrs | Catálogo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --black:#0D0D0D; --red:#E50914; --white:#FFF; --gray:#CCC; --panel:#161616; --line:#303030; --street:'Montserrat',Arial,sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--black); color:var(--white); font-family:Arial, Helvetica, sans-serif; }
+    .tech-mesh { position:fixed; inset:0; z-index:0; width:100%; height:100%; pointer-events:none; opacity:.82; }
+    .site-header, main, .site-footer { position:relative; z-index:1; }
+    button { font:inherit; }
+    button, .brand-card, .sub-card, .shoe-card { -webkit-tap-highlight-color:transparent; }
+    .site-header { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; min-height:76px; padding:10px clamp(18px,5vw,72px); background:rgba(13,13,13,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(10px); }
+    .logo { display:flex; align-items:center; gap:11px; color:var(--white); text-decoration:none; font-family:var(--street); font-weight:900; letter-spacing:1.5px; }
+    .logo-image { width:50px; height:50px; object-fit:cover; object-position:center; border-radius:50%; border:1px solid var(--red); }
+    .logo strong { color:var(--red); }
+    .home-button { border:1px solid var(--red); color:var(--white); background:transparent; cursor:pointer; padding:10px 14px; font-family:var(--street); text-transform:uppercase; font-size:.72rem; font-weight:900; letter-spacing:.8px; }
+    .home-button:hover { background:var(--red); }
+    main { max-width:1440px; margin:auto; padding:42px clamp(18px,5vw,72px) 64px; }
+    .eyebrow { margin:0 0 8px; color:var(--red); font-size:.75rem; font-weight:900; letter-spacing:2px; text-transform:uppercase; }
+    h1 { margin:0; font-family:var(--street); font-size:clamp(2rem,5vw,4.6rem); font-weight:900; line-height:.95; text-transform:uppercase; letter-spacing:-2px; }
+    .intro { max-width:600px; color:var(--gray); line-height:1.6; }
+    .breadcrumb { min-height:30px; margin:28px 0 14px; color:var(--gray); font-size:.82rem; }
+    .breadcrumb button { padding:0; border:0; color:inherit; background:none; cursor:pointer; }
+    .breadcrumb button:hover { color:var(--red); }
+    .breadcrumb span { padding:0 7px; color:var(--red); }
+    .catalog-title { display:flex; align-items:end; justify-content:space-between; gap:20px; margin:0 0 18px; }
+    h2 { margin:0; font-family:var(--street); font-size:clamp(1.35rem,3vw,2.2rem); font-weight:900; text-transform:uppercase; }
+    .count { color:var(--gray); font-size:.78rem; text-align:right; }
+    .brand-grid, .sub-grid, .shoe-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .brand-card, .sub-card, .shoe-card { min-width:0; overflow:hidden; background:var(--panel); border:1px solid var(--line); cursor:pointer; transition:transform .2s, border-color .2s; }
+    .brand-card:hover, .sub-card:hover, .shoe-card:hover { transform:translateY(-5px); border-color:var(--line); box-shadow:0 14px 30px rgba(0,0,0,.55), 0 0 26px rgba(229,9,20,.36), 0 0 8px rgba(229,9,20,.45); }
+    .brand-card, .sub-card { position:relative; aspect-ratio:3/4; text-align:left; }
+    .brand-card img, .sub-card img { width:100%; height:100%; object-fit:cover; display:block; opacity:.82; transition:transform .35s; }
+    .brand-card:hover img, .sub-card:hover img { transform:scale(1.06); }
+    .cover-fallback { position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(135deg,#242424,#0d0d0d); color:#777; font-weight:900; font-size:1rem; letter-spacing:2px; }
+    .brand-card img + .cover-fallback, .sub-card img + .cover-fallback { display:none; }
+    .brand-card img.is-broken + .cover-fallback, .sub-card img.is-broken + .cover-fallback { display:grid; }
+    .cover-name { position:absolute; right:0; bottom:0; left:0; z-index:1; padding:34px 16px 16px; background:linear-gradient(transparent,rgba(0,0,0,.95)); color:var(--white); font-family:var(--street); font-weight:900; font-size:clamp(1rem,2vw,1.4rem); letter-spacing:1px; text-transform:uppercase; }
+    .shoe-card { position:relative; text-align:left; color:var(--white); }
+    .shoe-card .cover-fallback { display: none; }
+    .shoe-card img.is-broken + .cover-fallback { display: grid; }
+    .shoe-card img.is-broken + .cover-fallback { display:grid; }
+    .shoe-photo { display:block; width:100%; aspect-ratio:1/1; object-fit:cover; background:#222; }
+    .shoe-info { padding:14px; }
+    .shoe-info h3 { min-height:38px; margin:0 0 6px; font-family:var(--street); font-size:.97rem; font-weight:900; line-height:1.2; }
+    .shoe-meta { margin:0 0 12px; color:var(--gray); font-size:.78rem; }
+    .price { margin:0 0 13px; font-size:1.08rem; font-weight:900; color:var(--white); }
+    .details-button { width:100%; border:0; background:var(--red); color:white; padding:11px 8px; cursor:pointer; font-family:var(--street); font-size:.73rem; font-weight:900; letter-spacing:.5px; text-transform:uppercase; }
+    .details-button:hover { filter:brightness(1.16); }
+    .empty { grid-column:1/-1; padding:45px 15px; border:1px dashed var(--line); color:var(--gray); text-align:center; }
+    .modal { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(0,0,0,.86); }
+    .modal.open { display:flex; }
+    .modal-box { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); width:min(1040px,100%); max-height:92vh; overflow:auto; background:#121212; border:1px solid #4a4a4a; }
+    .close { position:absolute; z-index:2; right:10px; top:10px; width:40px; height:40px; border:1px solid #777; border-radius:50%; background:#0d0d0d; color:white; cursor:pointer; font-size:1.5rem; }
+    .gallery { padding:26px; background:#0a0a0a; }
+    .main-photo-wrap { position:relative; }
+    .main-photo { width:100%; aspect-ratio:1/1; display:block; object-fit:contain; background:#202020; }
+    .slider-arrow { position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border:0; background:rgba(13,13,13,.82); color:white; cursor:pointer; font-size:1.6rem; }
+    .slider-arrow:hover { background:var(--red); }
+    .prev { left:0; } .next { right:0; }
+    .thumbs { display:flex; gap:8px; margin-top:12px; overflow:auto; padding-bottom:4px; }
+    .thumb { flex:0 0 67px; height:67px; padding:0; border:2px solid transparent; background:#252525; cursor:pointer; }
+    .thumb.active { border-color:var(--red); }
+    .thumb img { width:100%; height:100%; object-fit:cover; }
+    .modal-info { padding:46px 28px 28px; }
+    .modal-info h2 { margin:0 0 10px; line-height:1.05; }
+    .modal-category { color:var(--gray); font-size:.82rem; text-transform:uppercase; letter-spacing:1px; }
+    .modal-price { margin:24px 0; color:var(--red); font-size:1.8rem; font-weight:900; }
+    .size-label { display:block; margin-bottom:10px; font-size:.8rem; font-weight:900; letter-spacing:.8px; text-transform:uppercase; }
+    .sizes { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+    .size { min-width:46px; height:42px; border:1px solid #555; background:transparent; color:white; cursor:pointer; }
+    .size.active, .size:hover { border-color:var(--red); background:var(--red); }
+    .whatsapp { display:block; width:100%; border:0; background:#25D366; color:#061b0d; padding:15px; text-align:center; text-decoration:none; font-family:var(--street); font-size:.85rem; font-weight:900; text-transform:uppercase; letter-spacing:.4px; }
+    .whatsapp:hover { filter:brightness(1.1); }
+    .notice { margin:12px 0 0; color:var(--gray); font-size:.73rem; line-height:1.45; }
+    .site-footer { border-top:1px solid var(--red); background:#080808; padding:44px clamp(18px,5vw,72px) 20px; }
+    .footer-content { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px; max-width:1440px; margin:auto; }
+    .footer-logo { display:flex; align-items:center; gap:10px; margin-bottom:12px; font-family:var(--street); font-size:1.05rem; font-weight:900; letter-spacing:1px; }
+    .footer-logo img { width:42px; height:42px; border:1px solid var(--red); border-radius:50%; object-fit:cover; }
+    .footer-logo strong { color:var(--red); }
+    .footer-slogan, .footer-contact { max-width:330px; margin:0; color:var(--gray); font-size:.85rem; line-height:1.6; }
+    .footer-column h3 { margin:0 0 14px; font-family:var(--street); font-size:.85rem; font-weight:900; letter-spacing:.8px; text-transform:uppercase; }
+    .footer-links { display:grid; gap:10px; }
+    .footer-links a { color:var(--gray); font-size:.85rem; text-decoration:none; }
+    .footer-links a:hover { color:var(--red); }
+    .footer-social { display:flex; gap:14px; align-items:center; }
+    .footer-social a { display:grid; width:42px; height:42px; place-items:center; color:var(--red); border:1px solid var(--line); text-decoration:none; transition:border-color .2s, background .2s; }
+    .footer-social a:hover { border-color:var(--red); background:rgba(229,9,20,.12); }
+    .footer-social svg { width:21px; height:21px; fill:currentColor; }
+    .footer-bottom { max-width:1440px; margin:34px auto 0; padding-top:18px; border-top:1px solid var(--line); color:#888; font-size:.73rem; text-align:center; }
+    @media (max-width:760px) { .brand-grid, .sub-grid, .shoe-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } main { padding-top:30px; } .site-header { min-height:68px; } .logo-image { width:44px; height:44px; } .logo { font-size:.82rem; } .home-button { padding:9px 10px; font-size:.65rem; } .modal { align-items:end; padding:0; } .modal-box { grid-template-columns:1fr; max-height:94vh; border-bottom:0; } .gallery { padding:18px; } .modal-info { padding:24px 20px 30px; } .main-photo { aspect-ratio:1.12/1; } .site-footer { padding-top:36px; } .footer-content { grid-template-columns:1fr; gap:28px; text-align:center; } .footer-logo, .footer-social { justify-content:center; } .footer-slogan, .footer-contact { margin-right:auto; margin-left:auto; } }
+    @media (max-width:360px) { .shoe-info { padding:11px; } .details-button { font-size:.65rem; } }
+  </style>
+</head>
+<body>
+  <!-- Canvas da malha urbana tech, renderizado atrás do conteúdo. -->
+  <canvas class="tech-mesh" id="tech-mesh" aria-hidden="true"></canvas>
+  <header class="site-header">
+    <a class="logo" href="#" aria-label="Voltar à capa de marcas" onclick="goHome(); return false;">
+      <!-- Salve a logo enviada como img/logo-le-flame.jpg ou altere STORE.logo no script. -->
+      <img class="logo-image" src="img/logo-le-flame.jpg" alt="Logo Le Flame Snkrs" onerror="this.style.display='none'">
+      <span>LE FLAME <strong>SNKRS</strong></span>
+    </a>
+    <button class="home-button" type="button" onclick="goHome()">Marcas</button>
+  </header>
+  <main>
+    <p class="eyebrow">Streetwear premium</p>
+    <h1 id="page-title">Encontre seu flame</h1>
+    <p class="intro" id="page-intro">Selecione uma marca e navegue pelas linhas disponíveis.</p>
+    <nav class="breadcrumb" id="breadcrumb" aria-label="Navegação atual"></nav>
+    <section aria-labelledby="catalog-heading">
+      <div class="catalog-title"><h2 id="catalog-heading">Marcas</h2><span class="count" id="count"></span></div>
+      <div id="catalog" class="brand-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <section>
+        <div class="footer-logo">
+          <img src="img/logo-le-flame.jpg" alt="Logo Le Flame Snkrs" onerror="this.style.display='none'">
+          <span>LE FLAME <strong>SNKRS</strong></span>
+        </div>
+        <p class="footer-slogan">Seu próximo par, no seu melhor estilo.</p>
+      </section>
+      <nav class="footer-column" aria-label="Links rápidos">
+        <h3>Links rápidos</h3>
+        <div class="footer-links">
+          <a href="#" onclick="goHome(); return false;">Marcas</a>
+          <a href="#catalog">Lançamentos</a>
+          <a href="#" onclick="this.href='https://wa.me/'+WHATSAPP;">Atendimento WhatsApp</a>
+        </div>
+      </nav>
+      <section class="footer-column">
+        <div class="footer-social">
+          <a href="https://instagram.com/leflame_snkrs" target="_blank" rel="noopener" aria-label="Instagram Le Flame Snkrs">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5ZM17.8 6.1a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
+          </a>
+          <a href="#" onclick="this.href='https://wa.me/'+WHATSAPP;" aria-label="WhatsApp Le Flame Snkrs">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 2.9 19.1L2 22l3-.9A11.8 11.8 0 1 0 20.5 3.5ZM12 21a9 9 0 0 1-4.6-1.3l-.3-.2-1.8.5.5-1.7-.2-.3A9 9 0 1 1 12 21Zm4.9-6.7c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1a7.3 7.3 0 0 1-2.2-1.4 8.2 8.2 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.4-.4c.1-.2.2-.3.3-.5a.5.5 0 0 0 0-.5c-.1-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.2 2.8 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5 6 6 0 0 0 3.6.8 3.1 3.1 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.2-.2-.5-.3Z"/></svg>
+          </a>
+        </div>
+      </section>
+    </div>
+    <div class="footer-bottom">© 2026 Le Flame Snkrs. Todos os direitos reservados.</div>
+  </footer>
+
+  <div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-name" onclick="closeOnBackdrop(event)">
+    <div class="modal-box">
+      <button class="close" type="button" aria-label="Fechar detalhes" onclick="closeModal()">×</button>
+      <div class="gallery">
+        <div class="main-photo-wrap">
+          <button class="slider-arrow prev" type="button" aria-label="Foto anterior" onclick="changePhoto(-1)">‹</button>
+          <img class="main-photo" id="main-photo" src="" alt="">
+          <button class="slider-arrow next" type="button" aria-label="Próxima foto" onclick="changePhoto(1)">›</button>
+        </div>
+        <div class="thumbs" id="thumbs" aria-label="Miniaturas das fotos"></div>
+      </div>
+      <div class="modal-info">
+        <p class="modal-category" id="modal-category"></p>
+        <h2 id="modal-name"></h2>
+        <p class="modal-price" id="modal-price"></p>
+        <label class="size-label">Escolha seu tamanho</label>
+        <div class="sizes" id="sizes"></div>
+        <a class="whatsapp" id="whatsapp-link" href="#" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+        <p class="notice">Após escolher o tamanho, o pedido será preenchido automaticamente no WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Malha urbana tech: canvas leve, responsivo e com pulsação discreta. */
+    const meshCanvas = document.querySelector('#tech-mesh');
+    const meshContext = meshCanvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let meshWidth = 0, meshHeight = 0, meshScale = 1;
+    function resizeMesh() {
+      meshScale = Math.min(window.devicePixelRatio || 1, 2);
+      meshWidth = window.innerWidth;
+      meshHeight = window.innerHeight;
+      meshCanvas.width = meshWidth * meshScale;
+      meshCanvas.height = meshHeight * meshScale;
+      meshContext.setTransform(meshScale, 0, 0, meshScale, 0, 0);
+    }
+    function drawMesh(time = 0) {
+      const wave = Math.sin(time / 5200) * .5 + .5;
+      const spacing = Math.max(58, Math.min(92, meshWidth / 15));
+      const offsetX = Math.sin(time / 11000) * spacing;
+      const offsetY = Math.cos(time / 13000) * spacing;
+      meshContext.clearRect(0, 0, meshWidth, meshHeight);
+      meshContext.lineWidth = .7;
+      meshContext.strokeStyle = `rgba(229, 9, 20, ${.07 + wave * .045})`;
+      meshContext.fillStyle = `rgba(229, 9, 20, ${.32 + wave * .20})`;
+      meshContext.beginPath();
+      for (let x = offsetX - spacing; x < meshWidth + spacing; x += spacing) { meshContext.moveTo(x, 0); meshContext.lineTo(x, meshHeight); }
+      for (let y = offsetY - spacing; y < meshHeight + spacing; y += spacing) { meshContext.moveTo(0, y); meshContext.lineTo(meshWidth, y); }
+      meshContext.stroke();
+      for (let x = offsetX - spacing; x < meshWidth + spacing; x += spacing) {
+        for (let y = offsetY - spacing; y < meshHeight + spacing; y += spacing) {
+          const size = 1.15 + ((Math.sin((x + y + time / 12) / 170) + 1) * .34);
+          meshContext.beginPath(); meshContext.arc(x, y, size, 0, Math.PI * 2); meshContext.fill();
+        }
+      }
+      if (!reduceMotion) requestAnimationFrame(drawMesh);
+    }
+    window.addEventListener('resize', () => { resizeMesh(); if (reduceMotion) drawMesh(performance.now()); });
+    resizeMesh();
+    drawMesh();
+
+    /* ======================= ÁREA FÁCIL DE EDITAR =======================
+       1) Altere WHATSAPP para o número da loja (DDI + DDD + número, sem símbolos).
+       2) Troque qualquer caminho img/... pelas suas fotos.
+       3) Duplique objetos em PRODUCTS para adicionar modelos.
+    ==================================================================== */
+    const WHATSAPP = '5541984751023';
+    const STORE = { name: 'Le Flame Snkrs', logo: 'img/logo-le-flame.jpg' };
+    const BRANDS = [
+      { id:'nike', name:'Nike', cover:'img/brands/nike-port.png', subs:[
+        { id:'jordan', name:'Air Jordan', cover:'img/sub-brands/jd.png' }, { id:'af1', name:'Air Force 1', cover:'img/sub-brands/af1.png' },
+        { id:'lebron', name:'LeBron', cover:'img/sub-brands/lebron.png' }, { id:'dunk', name:'Dunk', cover:'img/sub-brands/dunk.png' }
+      ]},
+      { id:'adidas', name:'Adidas', cover:'img/brands/adidas-port.png', subs:[{ id:'samba', name:'Samba', cover:'img/sub/samba-cover.jpg' }, { id:'forum', name:'Forum', cover:'img/sub/forum-cover.jpg' }]},
+      { id:'new-balance', name:'New Balance', cover:'img/brands/nb-port.png', subs:[{ id:'550', name:'550', cover:'img/sub/550-cover.jpg' }, { id:'9060', name:'9060', cover:'img/sub/9060-cover.jpg' }]},
+      { id:'bape', name:'Bape', cover:'img/brands/bape-port.png', subs:[{ id:'sta', name:'Bape Sta', cover:'img/sub/bapesta-cover.jpg' }]},
+      { id:'puma', name:'Puma', cover:'img/brands/puma-port.png', subs:[{ id:'suede', name:'Suede', cover:'img/sub/suede-cover.jpg' }, { id:'palermo', name:'Palermo', cover:'img/sub/palermo-cover.jpg' }]},
+      { id:'converse', name:'Converse', cover:'img/brands/converse-port.png', subs:[{ id:'chuck', name:'Chuck Taylor', cover:'img/sub/chuck-cover.jpg' }]}
+    ];
+    const PRODUCTS = [
+      { id:'jordan1-low', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Royal Toe', cover:'img/products/jordanport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jordanlow.png','img/products/jordanlow2.png','img/products/jordanlow3.png','img/tenis/jordan1-chicago-traseira.jpg'] },
+      { id:'jordan1-low2', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Green Toe', cover:'img/products/jdgreenport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jdgreen.png','img/products/jdgreen1.png','img/products/jdgreen2.png'] },
+      { id:'jordan1-low3', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jdbrownport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jdbrown.jpg','img/products/jdbrown1.jpg','img/products/jdbrown2.jpg'] },
+      { id:'jordan1-low4', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jdoliveport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jdolive.jpg','img/products/jdolive1.jpg','img/products/jdolive2.jpg'] },
+      { id:'jordan1-low5', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jdvoodoport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jdvoodo.jpg','img/products/jdvoodo1.jpg','img/products/jdvoodo2.jpg'] },
+      { id:'jordan1-low6', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd1lowfragport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd1lowfrag.png','img/products/jd1lowfrag1.png','img/products/jd1lowfrag2.png'] },
+      { id:'jordan3-l', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd3rosaport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd3rosa.png','img/products/jd3rosa1.png','img/products/jd3rosa2.png'] },
+      { id:'jordan3-2', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd3blueport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd3blue.png','img/products/jd3blue1.png','img/products/jd3blue2.png'] },
+      { id:'jordan3-3', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd3blackport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd3black.png','img/products/jd3black1.png','img/products/jd3black2.png'] },
+      { id:'jordan3-4', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd3begeport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd3bege.png','img/products/jd3bege1.png','img/products/jd3bege2.png'] },
+      { id:'jordan4-1', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4port.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4.jpg','img/products/jd41.jpg','img/products/jd42.jpg'] },
+      { id:'jordan4-2', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4purpleport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4purple.jpg','img/products/jd4purple1.jpg','img/products/jd4purple2.jpg'] },
+      { id:'jordan4-3', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4vinoport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4vino.png','img/products/jd4vino1.png','img/products/jd4vino2.png'] },
+      { id:'jordan4-4', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4greyport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4grey.png','img/products/jd4grey1.png','img/products/jd4grey2.png'] },
+      { id:'jordan4-5', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4offport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4off.png','img/products/jd4off1.png','img/products/jd4off2.png'] },
+      { id:'jordan4-6', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd4greenport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd4green.png','img/products/jd4green1.png','img/products/jd4green2.png'] },
+      { id:'jordan5-1', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd5moraport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd5mora.png','img/products/jd5mora1.png','img/products/jd5mora2.png'] },
+      { id:'jordan5-2', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd5redport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd5red.png','img/products/jd5red1.png','img/products/jd5red2.png'] },
+      { id:'jordan13-1', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Hemp White', cover:'img/products/jd13port.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jd13.png','img/products/jd131.png','img/products/jd132.png'] },
+      { id:'af1-white', brand:'nike', sub:'af1', name:'Nike Air Force 1 White', price:699.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/tenis/af1-white-main.jpg','img/tenis/af1-white-lateral.jpg','img/tenis/af1-white-sola.jpg'] },
+      { id:'dunk-panda', brand:'nike', sub:'dunk', name:'Nike Dunk Low Panda', price:849.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/dunk-panda-main.jpg','img/tenis/dunk-panda-lateral.jpg','img/tenis/dunk-panda-traseira.jpg'] },
+      { id:'samba-og', brand:'adidas', sub:'samba', name:'Adidas Samba OG', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/tenis/samba-og-main.jpg','img/tenis/samba-og-lateral.jpg','img/tenis/samba-og-sola.jpg'] },
+      { id:'nb550', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/nb550-main.jpg','img/tenis/nb550-lateral.jpg','img/tenis/nb550-traseira.jpg'] },
+      { id:'bapesta', brand:'bape', sub:'sta', name:'Bape Sta Black', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/tenis/bapesta-main.jpg','img/tenis/bapesta-lateral.jpg','img/tenis/bapesta-sola.jpg'] },
+      { id:'puma-suede', brand:'puma', sub:'suede', name:'Puma Suede Classic', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/puma-suede-main.jpg','img/tenis/puma-suede-lateral.jpg','img/tenis/puma-suede-sola.jpg'] },
+      { id:'chuck70', brand:'converse', sub:'chuck', name:'Converse Chuck 70', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/tenis/chuck70-main.jpg','img/tenis/chuck70-lateral.jpg','img/tenis/chuck70-sola.jpg'] }
+    ];
+    let state = { view:'brands', brand:null, sub:null, product:null, photo:0, size:null };
+    const money = value => value.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+    const getBrand = id => BRANDS.find(b => b.id === id);
+    const getSub = (brand, id) => brand.subs.find(s => s.id === id);
+    const image = (src, alt, className='') => `<img class="${className}" src="${src}" alt="${alt}" onerror="this.classList.add('is-broken');">`;
+    function setHeader(title, intro, heading, count) { document.querySelector('#page-title').textContent=title; document.querySelector('#page-intro').textContent=intro; document.querySelector('#catalog-heading').textContent=heading; document.querySelector('#count').textContent=count; }
+    function renderBreadcrumb() {
+      const parts = ['<button type="button" onclick="goHome()">Marcas</button>'];
+      if (state.brand) parts.push(`<span>›</span><button type="button" onclick="showSubs('${state.brand}')">${getBrand(state.brand).name}</button>`);
+      if (state.sub) parts.push(`<span>›</span><b>${getSub(getBrand(state.brand), state.sub).name}</b>`);
+      document.querySelector('#breadcrumb').innerHTML = parts.join('');
+    }
+    function renderBrands() {
+      state = { view:'brands', brand:null, sub:null, product:null, photo:0, size:null };
+      setHeader('Encontre seu flame', 'Selecione uma marca e navegue pelas linhas disponíveis.', 'Marcas', `${BRANDS.length} marcas`);
+      document.querySelector('#catalog').className='brand-grid';
+      document.querySelector('#catalog').innerHTML=BRANDS.map(b => `<button class="brand-card" type="button" onclick="showSubs('${b.id}')">${image(b.cover, 'Capa '+b.name)}<span class="cover-fallback">${b.name}</span><span class="cover-name">${b.name}</span></button>`).join('');
+      renderBreadcrumb();
+    }
+    function showSubs(brandId) {
+      const brand=getBrand(brandId); state={ view:'subs', brand:brandId, sub:null, product:null, photo:0, size:null };
+      setHeader(brand.name, `Escolha uma linha ${brand.name} para ver os modelos disponíveis.`, 'Linhas', `${brand.subs.length} coleções`);
+      document.querySelector('#catalog').className='sub-grid';
+      document.querySelector('#catalog').innerHTML=brand.subs.map(s => `<button class="sub-card" type="button" onclick="showShoes('${brand.id}','${s.id}')">${image(s.cover, 'Capa '+s.name)}<span class="cover-fallback">${s.name}</span><span class="cover-name">${s.name}</span></button>`).join('');
+      renderBreadcrumb(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function showShoes(brandId, subId) {
+      const brand=getBrand(brandId), sub=getSub(brand,subId), products=PRODUCTS.filter(p=>p.brand===brandId && p.sub===subId);
+      state={ view:'shoes', brand:brandId, sub:subId, product:null, photo:0, size:null };
+      setHeader(sub.name, `${brand.name} / ${sub.name}. Clique em um tênis para ver todos os detalhes e fotos.`, 'Sneakers disponíveis', `${products.length} modelo${products.length!==1?'s':''}`);
+      document.querySelector('#catalog').className='shoe-grid';
+      document.querySelector('#catalog').innerHTML=products.length ? products.map(p=>`<article class="shoe-card" tabindex="0" role="button" aria-label="Ver detalhes do ${p.name}" onclick="openProduct('${p.id}')" onkeydown="if(event.key==='Enter')openProduct('${p.id}')"><div style="position:relative; aspect-ratio:1/1; overflow:hidden;">${image(p.cover || p.photos[0], p.name, 'shoe-photo')}<span class="cover-fallback">${p.name}</span></div><div class="shoe-info"><h3>${p.name}</h3><p class="shoe-meta">Tamanhos: ${p.sizes[0]} ao ${p.sizes[p.sizes.length-1]}</p><p class="price">${money(p.price)}</p><button class="details-button" type="button" onclick="event.stopPropagation();openProduct('${p.id}')">Ver detalhes / fotos</button></div></article>`).join('') : '<p class="empty">Novos modelos em breve.</p>';
+      renderBreadcrumb(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function openProduct(productId) { state.product=PRODUCTS.find(p=>p.id===productId); state.photo=0; state.size=null; document.querySelector('#product-modal').classList.add('open'); document.body.style.overflow='hidden'; renderModal(); }
+    function renderModal() {
+      const p=state.product, brand=getBrand(p.brand), sub=getSub(brand,p.sub);
+      document.querySelector('#modal-name').textContent=p.name; document.querySelector('#modal-category').textContent=`${brand.name} / ${sub.name}`; document.querySelector('#modal-price').textContent=money(p.price);
+      document.querySelector('#main-photo').src=p.photos[state.photo]; document.querySelector('#main-photo').alt=`${p.name} — foto ${state.photo+1}`;
+      document.querySelector('#thumbs').innerHTML=p.photos.map((photo,i)=>`<button class="thumb ${i===state.photo?'active':''}" type="button" aria-label="Ver foto ${i+1}" onclick="selectPhoto(${i})">${image(photo,`Miniatura ${i+1}`)}</button>`).join('');
+      document.querySelector('#sizes').innerHTML=p.sizes.map(s=>`<button class="size ${s===state.size?'active':''}" type="button" onclick="selectSize(${s})">${s}</button>`).join(''); updateWhatsApp();
+    }
+    function selectPhoto(index) { state.photo=index; renderModal(); }
+    function changePhoto(direction) { const total=state.product.photos.length; state.photo=(state.photo+direction+total)%total; renderModal(); }
+    function selectSize(size) { state.size=size; renderModal(); }
+    function updateWhatsApp() { const p=state.product; const size=state.size ? state.size : 'a confirmar'; const message=`Olá, ${STORE.name}! Tenho interesse no tênis *${p.name}*.` + '\n' + `Tamanho: *${size}*` + '\n' + `Valor: *${money(p.price)}*`; document.querySelector('#whatsapp-link').href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`; }
+    function closeModal() { document.querySelector('#product-modal').classList.remove('open'); document.body.style.overflow=''; }
+    function closeOnBackdrop(event) { if(event.target.id==='product-modal') closeModal(); }
+    function goHome() { closeModal(); renderBrands(); }
+    document.addEventListener('keydown', event => { if(event.key==='Escape') closeModal(); if(document.querySelector('#product-modal').classList.contains('open') && event.key==='ArrowLeft') changePhoto(-1); if(document.querySelector('#product-modal').classList.contains('open') && event.key==='ArrowRight') changePhoto(1); });
+    renderBrands();
+  </script>
+</body>
+</html>
+
