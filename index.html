@@ -12,6 +12,157 @@
     :root { --black:#0D0D0D; --red:#E50914; --white:#FFF; --gray:#CCC; --panel:rgba(18, 18, 18, 0.75); --line:rgba(255, 255, 255, 0.12); --street:'Montserrat',Arial,sans-serif; }
     * { box-sizing:border-box; }
 
+    /* Botão Hambúrguer (Três Linhas) */
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hamburger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 38px;
+  height: 38px;
+  padding: 9px 8px;
+  background: transparent;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  border-color: var(--red);
+  background: rgba(229, 9, 20, 0.15);
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+}
+
+.hamburger-btn:hover span {
+  background-color: var(--red);
+}
+
+/* Menu Dropdown Lista */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 180px;
+  background: #121212;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 20;
+}
+
+.nav-dropdown.show {
+  display: block;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.nav-dropdown button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: var(--white);
+  padding: 10px 14px;
+  font-family: var(--street);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-dropdown button:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+/* Estilização do Modal Sobre Nós */
+.about-content {
+  max-width: 600px;
+  padding: 36px 28px;
+  background: #121212;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 16px;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.about-body h2 {
+  font-family: var(--street);
+  font-size: 1.4rem;
+  color: var(--white);
+  margin: 0 0 4px;
+}
+
+.about-body .tagline {
+  color: var(--red);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.about-body p, .about-body li {
+  color: #ccc;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.about-body h3 {
+  font-family: var(--street);
+  font-size: 1rem;
+  color: var(--white);
+  margin: 20px 0 8px;
+}
+
+.about-body ul {
+  padding-left: 18px;
+  margin: 0 0 20px;
+}
+
+.about-body li {
+  margin-bottom: 8px;
+}
+
+.about-divider {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+
+.about-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--red);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
     .top-shipping-bar {
   display: flex;
   align-items: center;
@@ -52,6 +203,65 @@
     padding: 6px 10px;
     letter-spacing: 0.5px;
   }
+}
+
+/* Container de fundo escuro que centraliza o Pop-up na tela */
+#request-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none; /* Escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Exibição e Animação */
+#request-modal.is-visible {
+  display: flex;
+}
+
+#request-modal.open {
+  opacity: 1;
+}
+
+#request-modal.open .request-content {
+  transform: scale(1);
+}
+
+/* Caixa Interna do Pop-up */
+.request-content {
+  position: relative;
+  width: min(440px, 100%);
+  background: #121212;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 16px;
+  padding: 36px 24px 28px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(229, 9, 20, 0.2);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.request-body h2 {
+  font-family: var(--street);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.request-body p {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.5;
+  margin: 0 0 22px;
 }
 
     html { scroll-behavior:smooth; }
@@ -362,9 +572,281 @@
     .footer-bottom { max-width:1440px; margin:34px auto 0; padding-top:18px; border-top:1px solid var(--line); color:#888; font-size:.73rem; text-align:center; }
     @media (max-width:760px) { .brand-grid, .sub-grid, .shoe-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } main { padding-top:30px; } .site-header { min-height:68px; } .logo-image { width:44px; height:44px; } .logo { font-size:.82rem; } .home-button { padding:9px 10px; font-size:.65rem; } .modal { align-items:end; padding:0; } .modal-box { grid-template-columns:1fr; max-height:94vh; border-bottom:0; } .gallery { padding:18px; } .modal-info { padding:24px 20px 30px; } .main-photo { aspect-ratio:1.12/1; } .site-footer { padding-top:36px; } .footer-content { grid-template-columns:1fr; gap:28px; text-align:center; } .footer-logo, .footer-social { justify-content:center; } .footer-slogan, .footer-contact { margin-right:auto; margin-left:auto; } }
     @media (max-width:360px) { .shoe-info { padding:11px; } .details-button { font-size:.65rem; } }
+
+    /* Fundo escuro que centraliza o modal na tela */
+#about-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none; /* Mantém escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Classes ativadas via JS ao abrir */
+#about-modal.is-visible {
+  display: flex;
+}
+
+#about-modal.open {
+  opacity: 1;
+}
+
+#about-modal.open .about-content {
+  transform: scale(1);
+}
+
+/* Caixa Flutuante Centralizada */
+.about-content {
+  position: relative;
+  width: min(600px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #121212;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 16px;
+  padding: 36px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(229, 9, 20, 0.2);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header da Seleção de Tamanho */
+.size-selection-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+.size-selection-header .size-label {
+  margin: 0 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  color: #fff !important;
+}
+
+/* Botão do Guia no Estilo Dark/Red Streetwear */
+button.size-guide-btn {
+  all: unset !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(229, 9, 20, 0.6) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  color: #ff2a35 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+button.size-guide-btn:hover {
+  background: rgba(229, 9, 20, 0.25) !important;
+  border-color: #e50914 !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.4) !important;
+}
+
+/* Modal do Guia de Medidas */
+#size-guide-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important; /* Camada superior ao modal do produto */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+#size-guide-modal.is-visible {
+  display: flex !important;
+}
+
+#size-guide-modal.open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.size-guide-content {
+  position: relative;
+  width: min(450px, 92%);
+  background: #121212 !important;
+  border: 1px solid rgba(229, 9, 20, 0.5) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(229, 9, 20, 0.2) !important;
+  transform: translateY(10px);
+  transition: transform 0.25s ease;
+}
+
+#size-guide-modal.open .size-guide-content {
+  transform: translateY(0);
+}
+
+.size-guide-content h3 {
+  margin-top: 0 !important;
+  color: #fff !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.guide-subtitle {
+  font-size: 0.82rem !important;
+  color: #aaa !important;
+  margin-bottom: 16px !important;
+}
+
+.size-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin-bottom: 16px !important;
+  text-align: center !important;
+}
+
+.size-table th {
+  background: rgba(229, 9, 20, 0.2) !important;
+  color: #e50914 !important;
+  padding: 8px !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+}
+
+.size-table td {
+  padding: 8px !important;
+  border-bottom: 1px solid #222 !important;
+  font-size: 0.88rem !important;
+}
+
+.size-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.guide-tip {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-left: 3px solid #e50914 !important;
+  padding: 10px 12px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.4 !important;
+  color: #ccc !important;
+  border-radius: 0 6px 6px 0 !important;
+}
+
+/* Botão Flutuante do WhatsApp */
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 9999;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  animation: pulse-neon 2s infinite;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  background-color: #20ba5a;
+}
+
+.whatsapp-icon {
+  width: 34px;
+  height: 34px;
+  fill: #ffffff;
+}
+
+/* Animação Efeito Pulse Neon */
+@keyframes pulse-neon {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7), 0 0 10px rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 18px rgba(37, 211, 102, 0), 0 0 20px rgba(37, 211, 102, 0.8);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 0 10px rgba(37, 211, 102, 0.5);
+  }
+}
+
+/* Ajuste de Posição para Dispositivos Móveis */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+  }
+  
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 </style>
 </head>
 <body>
+<!-- Modal do Guia de Medidas -->
+<div id="size-guide-modal" onclick="closeSizeGuideOnBackdrop(event)">
+  <div class="size-guide-content">
+    <button class="close" type="button" aria-label="Fechar guia de medidas" onclick="closeSizeGuideModal()">×</button>
+    <h3>Guia de Medidas</h3>
+    <p class="guide-subtitle">Meça do calcanhar ao dedão para encontrar seu tamanho ideal:</p>
+    
+    <table class="size-table">
+      <thead>
+        <tr>
+          <th>BR</th>
+          <th>US</th>
+          <th>Palmilha (cm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>37</td><td>6.5</td><td>24.5 cm</td></tr>
+        <tr><td>38</td><td>7.0</td><td>25.0 cm</td></tr>
+        <tr><td>39</td><td>7.5</td><td>25.5 cm</td></tr>
+        <tr><td>40</td><td>8.5</td><td>26.5 cm</td></tr>
+        <tr><td>41</td><td>9.5</td><td>27.5 cm</td></tr>
+        <tr><td>42</td><td>10.0</td><td>28.0 cm</td></tr>
+        <tr><td>43</td><td>11.0</td><td>29.0 cm</td></tr>
+        <tr><td>44</td><td>12.0</td><td>30.0 cm</td></tr>
+      </tbody>
+    </table>
+
+    <div class="guide-tip">
+      <strong>Dica:</strong> Se o seu pé for mais largo, recomendamos escolher 1 número maior para maior conforto.
+    </div>
+  </div>
+</div>
+
   <!-- Canvas da malha urbana tech, renderizado atrás do conteúdo. -->
   <canvas class="tech-mesh" id="tech-mesh" aria-hidden="true"></canvas>
   <div class="top-shipping-bar">
@@ -386,7 +868,18 @@
     oninput="searchProducts(this.value)"
   >
 </div>
-    <button class="home-button" type="button" onclick="goHome()">Marcas</button>
+    <div class="menu-container">
+  <button class="hamburger-btn" type="button" aria-label="Abrir Menu" onclick="toggleMenu(event)">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <div id="nav-dropdown" class="nav-dropdown">
+    <button type="button" onclick="openAboutModal()">Sobre Nós</button>
+  </div>
+</div>
+
   </header>
   <main>
     <p class="eyebrow">Streetwear premium</p>
@@ -445,15 +938,132 @@
         <p class="modal-category" id="modal-category"></p>
         <h2 id="modal-name"></h2>
         <p class="modal-price" id="modal-price"></p>
-        <label class="size-label">Escolha seu tamanho</label>
+        
+        <div class="size-selection-header">
+  <label class="size-label">Escolha seu tamanho</label>
+  <button type="button" class="size-guide-btn" onclick="openSizeGuideModal()">
+    Guia de Medidas
+  </button>
+</div>
+
         <div class="sizes" id="sizes"></div>
         <a class="whatsapp" id="whatsapp-link" href="#" target="_blank" rel="noopener">Pedir no WhatsApp</a>
         <p class="notice">Após escolher o tamanho, o pedido será preenchido automaticamente no WhatsApp.</p>
       </div>
     </div>
   </div>
+   <!-- Modal de Pedido Especial / WhatsApp -->
+<div id="request-modal" class="modal-backdrop" onclick="closeRequestModalOnBackdrop(event)">
+  <div class="modal-content request-content">
+    <button class="close" type="button" aria-label="Fechar" onclick="closeRequestModal()">×</button>
+    <div class="request-body">
+      <h2>NÃO ENCONTROU O SEU FLAME?</h2>
+      <p>Caso não encontre o modelo ou a cor desejada no catálogo, envie uma foto ou o nome do tênis direto no nosso WhatsApp!</p>
+      <a id="request-whatsapp-link" href="#" target="_blank" class="whatsapp-btn">
+        ENVIAR NO WHATSAPP
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="about-modal" class="modal-backdrop" onclick="closeAboutModalOnBackdrop(event)">
+  <div class="modal-content about-content">
+    <button class="close" type="button" aria-label="Fechar" onclick="closeAboutModal()">×</button>
+    <div class="about-body">
+      <h2>SOBRE A LE FLAME SNKRS</h2>
+      <p class="tagline">Acenda o seu estilo.</p>
+      
+      <p>A <strong>Le Flame Sneakers</strong> nasceu do desejo de conectar a cultura <em>streetwear</em> e a paixão por <em>sneakers</em> exclusivos a quem busca mais do que um simples tênis: busca identidade, atitude e presença.</p>
+      
+      <p>Sabemos que o tênis certo transforma qualquer visual. Por isso, selecionamos a dedo cada modelo do nosso catálogo, trazendo desde os clássicos atemporais das maiores marcas do mundo até os lançamentos e edições mais procurados da cena.</p>
+      
+      <hr class="about-divider">
+      
+      <h3>NOSSA MISSÃO</h3>
+      <p>Entregar o seu próximo par com <strong>qualidade impecável, transparência total e atendimento direto</strong>. Queremos que a sua experiência de escolha seja rápida, segura e sem complicações.</p>
+      
+      <h3>POR QUE A LE FLAME?</h3>
+      <ul>
+        <li><strong>Curadoria Exclusiva:</strong> Tênis selecionados que unem estética, conforto e presença.</li>
+        <li><strong>Atendimento Personalizado:</strong> Não achou o tamanho ou o modelo que procurava? Fale com a gente no WhatsApp que nós corremos atrás para você.</li>
+        <li><strong>Envio Seguro & Rápido:</strong> Garantimos que a sua caixa chegue em perfeitas condições para você mandar ver no visual.</li>
+      </ul>
+      
+      <div class="about-footer">
+        <strong>Le Flame SNKRS</strong> — <em>Seu próximo par, no seu melhor estilo.</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botão Flutuante do WhatsApp -->
+<a 
+  href="https://wa.me/5541984751023?text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." 
+  class="whatsapp-float" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label="Falar pelo WhatsApp"
+>
+  <svg viewBox="0 0 32 32" class="whatsapp-icon">
+    <path d="M16 2a14 14 0 0 0-12 21.2L2 30l7-1.8A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.2-4.4 1.1 1.2-4.2-.3-.5A11.5 11.5 0 1 1 16 27.5zm6.3-8.6c-.3-.2-2-.1-2.3-.2s-.6-.2-.8.2-1 1.2-1.2 1.4-.4.3-.8.1a10 10 0 0 1-3-1.8 11 11 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.6a.5.5 0 0 0 0-.5c-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7a1.4 1.4 0 0 0-1 .5 4.3 4.3 0 0 0-1.3 3.2 7.5 7.5 0 0 0 1.6 4 17.2 17.2 0 0 0 6.6 5.8c.9.4 1.7.7 2.3.9 1 .3 2 .3 2.7.2.8-.1 2.5-1 2.8-2a3.5 3.5 0 0 0 .2-2c-.1-.1-.4-.2-.7-.4z"/>
+  </svg>
+</a>
 
   <script>
+
+    // Alterna a exibição do Menu Lista
+function toggleMenu(event) {
+  event.stopPropagation();
+  const dropdown = document.querySelector('#nav-dropdown');
+  if (dropdown) {
+    dropdown.classList.toggle('show');
+  }
+}
+
+// Fecha o menu ao clicar em qualquer área fora dele
+document.addEventListener('click', () => {
+  const dropdown = document.querySelector('#nav-dropdown');
+  if (dropdown && dropdown.classList.contains('show')) {
+    dropdown.classList.remove('show');
+  }
+});
+
+// Abertura e Fechamento do Modal Sobre Nós
+function openAboutModal() {
+  const modal = document.querySelector('#about-modal');
+  const dropdown = document.querySelector('#nav-dropdown');
+  
+  if (dropdown) dropdown.classList.remove('show');
+  if (!modal) return;
+
+  modal.classList.add('is-visible');
+  document.body.style.overflow = 'hidden';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      modal.classList.add('open');
+    });
+  });
+}
+
+function closeAboutModal() {
+  const modal = document.querySelector('#about-modal');
+  if (!modal) return;
+
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+
+  setTimeout(() => {
+    modal.classList.remove('is-visible');
+  }, 250);
+}
+
+function closeAboutModalOnBackdrop(event) {
+  if (event.target.id === 'about-modal') {
+    closeAboutModal();
+  }
+}
+
     /* Malha urbana tech: canvas leve, responsivo e com pulsação discreta. */
     const meshCanvas = document.querySelector('#tech-mesh');
     const meshContext = meshCanvas.getContext('2d');
@@ -504,7 +1114,8 @@
         { id:'jordan', name:'Air Jordan', cover:'img/sub-brands/jd.png' }, { id:'af1', name:'Air Force 1', cover:'img/sub-brands/af1.png' },
         { id:'lebron', name:'LeBron', cover:'img/sub-brands/lebron.png' }, { id:'dunk', name:'Dunk', cover:'img/sub-brands/dunk.png' }
       ]},
-      { id:'adidas', name:'Adidas', cover:'img/brands/adidas-port.png', subs:[{ id:'samba', name:'Samba', cover:'img/sub/samba-cover.jpg' }, { id:'forum', name:'Forum', cover:'img/sub/forum-cover.jpg' }]},
+      { id:'adidas', name:'Adidas', cover:'img/brands/adidas-port.png', subs:[
+        { id:'samba', name:'Samba', cover:'img/sub-brands/samba.png' }, { id:'forum', name:'Forum', cover:'img/sub-brands/FORUM.png' }]},
       { id:'new-balance', name:'New Balance', cover:'img/brands/nb-port.png', subs:[{ id:'550', name:'550', cover:'img/sub/550-cover.jpg' }, { id:'9060', name:'9060', cover:'img/sub/9060-cover.jpg' }]},
       { id:'bape', name:'Bape', cover:'img/brands/bape-port.png', subs:[{ id:'sta', name:'Bape Sta', cover:'img/sub/bapesta-cover.jpg' }]},
       { id:'puma', name:'Puma', cover:'img/brands/puma-port.png', subs:[{ id:'suede', name:'Suede', cover:'img/sub/suede-cover.jpg' }, { id:'palermo', name:'Palermo', cover:'img/sub/palermo-cover.jpg' }]},
@@ -584,7 +1195,18 @@
       { id:'dunk-10', brand:'nike', sub:'dunk', name:'Off-White x Nike Dunk Low Lot 38', cover:'img/products/dk9port.png', price:849.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/dk9.jpg','img/products/dk91.jpg','img/products/dk92.jpg'] },
       { id:'dunk-11', brand:'nike', sub:'dunk', name:'Nike Dunk Rosewell Rayguns', cover:'img/products/dk10port.png', price:849.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/dk10.png','img/products/dk101.png','img/products/dk102.png'] },
       { id:'dunk-12', brand:'nike', sub:'dunk', name:'Nike Tênis Dunk Low Retro "UCLA"', cover:'img/products/dkaport.png', price:849.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/dka.png','img/products/dka1.png','img/products/dka2.png'] },
-      { id:'samba-og', brand:'adidas', sub:'samba', name:'Adidas Samba OG', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/tenis/samba-og-main.jpg','img/tenis/samba-og-lateral.jpg','img/tenis/samba-og-sola.jpg'] },
+      //SAMBA'S//
+      { id:'samba-1', brand:'adidas', sub:'samba', name:'Tênis adidas Samba OG White Silver Metallic', cover:'img/products/sbport.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/sb1.jpg','img/products/sb11.jpg','img/products/sb12.jpg'] },
+      { id:'samba-2', brand:'adidas', sub:'samba', name:'Tênis adidas Samba Og Night Navy Gum', cover:'img/products/sb2port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/sb2.png','img/products/sb21.png','img/products/sb22.png'] },
+      { id:'samba-3', brand:'adidas', sub:'samba', name:'Tênis Adidas Samba OG "White Black Gum"', cover:'img/products/sb3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/sb3.png','img/products/sb31.png','img/products/sb32.png'] },
+      { id:'samba-4', brand:'adidas', sub:'samba', name:'Adidas Tênis Samba OG "Aurora Ink/Cream White"', cover:'img/products/sb4port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/sb4.png','img/products/sb41.png','img/products/sb42.png'] },
+      //FORUM'S//
+      { id:'forum-2', brand:'adidas', sub:'forum', name:'Tênis Adidas Forum - Bad Bunny Black', cover:'img/products/fr11port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr11.png','img/products/fr12.png','img/products/fr13.png'] },
+      { id:'forum-3', brand:'adidas', sub:'forum', name:'Bad Bunny x adidas Forum Buckle Low Blue', cover:'img/products/fr2port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr21.png','img/products/fr22.png','img/products/fr23.png'] },
+      { id:'forum-4', brand:'adidas', sub:'forum', name:'adidas Forum 84 Low Branch Brown', cover:'img/products/fr3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr3.png','img/products/fr31.png','img/products/fr32.png'] },
+      { id:'forum-5', brand:'adidas', sub:'forum', name:'Tênis Bad Bunny x adidas Forum Buckle Low White', cover:'img/products/fr4port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr4.png','img/products/fr41.png','img/products/fr42.png'] },
+      { id:'forum-6', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/fr5port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr5.png','img/products/fr51.png','img/products/fr52.png'] },
+
       { id:'nb550', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/nb550-main.jpg','img/tenis/nb550-lateral.jpg','img/tenis/nb550-traseira.jpg'] },
       { id:'bapesta', brand:'bape', sub:'sta', name:'Bape Sta Black', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/tenis/bapesta-main.jpg','img/tenis/bapesta-lateral.jpg','img/tenis/bapesta-sola.jpg'] },
       { id:'puma-suede', brand:'puma', sub:'suede', name:'Puma Suede Classic', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/puma-suede-main.jpg','img/tenis/puma-suede-lateral.jpg','img/tenis/puma-suede-sola.jpg'] },
@@ -766,6 +1388,100 @@
     function goHome() { closeModal(); renderBrands(); }
     document.addEventListener('keydown', event => { if(event.key==='Escape') closeModal(); if(document.querySelector('#product-modal').classList.contains('open') && event.key==='ArrowLeft') changePhoto(-1); if(document.querySelector('#product-modal').classList.contains('open') && event.key==='ArrowRight') changePhoto(1); });
     renderBrands();
+
+    // Configuração do Pop-up após 5 segundos
+function initRequestPopup() {
+  // Dispara o temporizador de 5 segundos (5000ms)
+  setTimeout(() => {
+    // Exibe apenas se o usuário não estiver com o modal de produto aberto
+    const productModal = document.querySelector('#product-modal');
+    if (productModal && productModal.classList.contains('open')) return;
+
+    openRequestModal();
+  }, 10000);
+}
+
+function openRequestModal() {
+  const modal = document.querySelector('#request-modal');
+  if (!modal) return;
+
+  // Monta a mensagem personalizada para o WhatsApp
+  const message = `Olá, ${STORE.name}! Procuro um tênis que não encontrei no catálogo. Podem me ajudar?`;
+  const whatsappLink = document.querySelector('#request-whatsapp-link');
+  if (whatsappLink) {
+    whatsappLink.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+  }
+
+  modal.classList.add('is-visible');
+  document.body.style.overflow = 'hidden';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      modal.classList.add('open');
+    });
+  });
+}
+
+function closeRequestModal() {
+  const modal = document.querySelector('#request-modal');
+  if (!modal) return;
+
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+
+  setTimeout(() => {
+    modal.classList.remove('is-visible');
+  }, 250);
+}
+
+function closeRequestModalOnBackdrop(event) {
+  if (event.target.id === 'request-modal') {
+    closeRequestModal();
+  }
+}
+
+// Inicia o contador assim que a página carregar
+initRequestPopup();
+
+function openSizeGuideModal() {
+  const modal = document.querySelector('#size-guide-modal');
+  if (!modal) return;
+
+  modal.classList.add('is-visible');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      modal.classList.add('open');
+    });
+  });
+}
+
+function closeSizeGuideModal() {
+  const modal = document.querySelector('#size-guide-modal');
+  if (!modal) return;
+
+  modal.classList.remove('open');
+
+  setTimeout(() => {
+    modal.classList.remove('is-visible');
+  }, 250);
+}
+
+function closeSizeGuideOnBackdrop(event) {
+  if (event.target.id === 'size-guide-modal') {
+    closeSizeGuideModal();
+  }
+}
+
+// Adicione/Certifique-se de que a verificação da tecla ESC fecha a guia também:
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeModal();
+    closeSizeGuideModal(); // Garante o fechamento da guia via ESC
+  }
+  if (document.querySelector('#product-modal').classList.contains('open') && event.key === 'ArrowLeft') changePhoto(-1);
+  if (document.querySelector('#product-modal').classList.contains('open') && event.key === 'ArrowRight') changePhoto(1);
+});
   </script>
 </body>
 </html>
