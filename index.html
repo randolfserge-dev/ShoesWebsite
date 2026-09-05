@@ -12,6 +12,47 @@
     :root { --black:#0D0D0D; --red:#E50914; --white:#FFF; --gray:#CCC; --panel:rgba(18, 18, 18, 0.75); --line:rgba(255, 255, 255, 0.12); --street:'Montserrat',Arial,sans-serif; }
     * { box-sizing:border-box; }
 
+   /* Top Bar */
+.top-bar {
+  background-color: #0d0d0d;
+  border-bottom: 1px solid #1f1f1f;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1000;
+}
+
+.top-bar-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.announcement {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.announcement.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
     /* Botão Hambúrguer (Três Linhas) */
 .menu-container {
   position: relative;
@@ -849,9 +890,16 @@ button.size-guide-btn:hover {
 
   <!-- Canvas da malha urbana tech, renderizado atrás do conteúdo. -->
   <canvas class="tech-mesh" id="tech-mesh" aria-hidden="true"></canvas>
-  <div class="top-shipping-bar">
-  <img src="https://flagcdn.com/w40/br.png" alt="Brasil" class="flag-icon" />
-  <span>FRETE GRÁTIS PARA TODO O BRASIL!</span>
+  <!-- Top Bar Rotativa -->
+<div class="top-bar">
+  <div class="top-bar-content" id="topBarContent">
+    <span class="announcement active">
+      <img src="https://flagcdn.com/w20/br.png" alt="Brasil" class="top-bar-icon">
+      FRETE GRÁTIS PARA TODO O BRASIL
+    </span>
+    <span class="announcement">💳 PARCELE EM ATÉ 12X NO CARTÃO</span>
+    <span class="announcement">⚡ ENVIO IMEDIATO & PRONTA ENTREGA</span>
+  </div>
 </div>
   <header class="site-header">
     <a class="logo" href="#" aria-label="Voltar à capa de marcas" onclick="goHome(); return false;">
@@ -882,7 +930,6 @@ button.size-guide-btn:hover {
 
   </header>
   <main>
-    <p class="eyebrow">Streetwear premium</p>
     <h1 id="page-title">Encontre seu flame</h1>
     <p class="intro" id="page-intro">Selecione uma marca e navegue pelas linhas disponíveis.</p>
     <nav class="breadcrumb" id="breadcrumb" aria-label="Navegação atual"></nav>
@@ -1111,16 +1158,42 @@ function closeAboutModalOnBackdrop(event) {
     const STORE = { name: 'Le Flame Snkrs', logo: 'img/logo-le-flame.jpg' };
     const BRANDS = [
       { id:'nike', name:'Nike', cover:'img/brands/nike-port.png', subs:[
-        { id:'jordan', name:'Air Jordan', cover:'img/sub-brands/jd.png' }, { id:'af1', name:'Air Force 1', cover:'img/sub-brands/af1.png' },
-        { id:'lebron', name:'LeBron', cover:'img/sub-brands/lebron.png' }, { id:'dunk', name:'Dunk', cover:'img/sub-brands/dunk.png' }
-      ]},
+        { id:'jordan', name:'Air Jordan', cover:'img/sub-brands/jd.png' }, 
+        { id:'af1', name:'Air Force 1', cover:'img/sub-brands/af1.png' },
+        { id:'lebron', name:'LeBron', cover:'img/sub-brands/lebron.png' }, 
+        { id:'dunk', name:'Dunk', cover:'img/sub-brands/dunk.png' }]},
+      
       { id:'adidas', name:'Adidas', cover:'img/brands/adidas-port.png', subs:[
-        { id:'samba', name:'Samba', cover:'img/sub-brands/samba.png' }, { id:'forum', name:'Forum', cover:'img/sub-brands/FORUM.png' }]},
-      { id:'new-balance', name:'New Balance', cover:'img/brands/nb-port.png', subs:[{ id:'550', name:'550', cover:'img/sub/550-cover.jpg' }, { id:'9060', name:'9060', cover:'img/sub/9060-cover.jpg' }]},
-      { id:'bape', name:'Bape', cover:'img/brands/bape-port.png', subs:[{ id:'sta', name:'Bape Sta', cover:'img/sub/bapesta-cover.jpg' }]},
-      { id:'puma', name:'Puma', cover:'img/brands/puma-port.png', subs:[{ id:'suede', name:'Suede', cover:'img/sub/suede-cover.jpg' }, { id:'palermo', name:'Palermo', cover:'img/sub/palermo-cover.jpg' }]},
-      { id:'converse', name:'Converse', cover:'img/brands/converse-port.png', subs:[{ id:'chuck', name:'Chuck Taylor', cover:'img/sub/chuck-cover.jpg' }]}
+        { id:'samba', name:'Samba', cover:'img/sub-brands/samba.png' },
+        { id:'forum', name:'Forum', cover:'img/sub-brands/FORUM.png' }]},
+
+      { id:'new-balance', name:'New Balance', cover:'img/brands/nb-port.png', subs:[
+        { id:'550', name:'550', cover:'img/brands/nb-port.png' }, 
+        { id:'9060', name:'9060', cover:'img/brands/nb-port.png' }]},
+      
+      { id:'bape', name:'Bape', cover:'img/brands/bape-port.png', subs:[
+        { id:'sta', name:'Bape Sta', cover:'img/brands/bape-port.png' }]},
+      
+      { id:'puma', name:'Puma', cover:'img/brands/puma-port.png', subs:[
+        { id:'suede', name:'Suede', cover:'img/brands/puma-port.png' }, 
+        { id:'LeFrance', name:'LeFrance', cover:'img/sub-brands/lefrance.png' }]},
+      
+      { id:'dior', name:'Dior', cover:'img/brands/dior-port.png', subs:[
+        { id:'b22', name:'b22', cover:'img/brands/dior-port.png' }, 
+        { id:'b30', name:'b30', cover:'img/brands/dior-port.png' }]},
+
+      { id:'louis vuitton', name:'louis vuitton', cover:'img/brands/lv-port.png', subs:[
+        { id:'lv trainer', name:'lv trainer', cover:'img/brands/lv-port.png' },
+        { id:'lv skate', name:'lv skate', cover:'img/brands/lv-port.png' } ]},
+
+      { id:'alexander mcqueen', name:'alexander mcqueen', cover:'img/brands/am-port.png', subs:[
+        { id:'alexander mcqueen', name:'alexander mcqueen', cover:'img/brands/am-port.png' } ]},
+
+      { id:'off white', name:'off white', cover:'img/brands/off-port.png', subs:[
+        { id:'off white', name:'off white', cover:'img/brands/off-port.png' } ]}
+        
     ];
+    
     const PRODUCTS = [
       //JORDAN'S//
       { id:'jordan1-low', brand:'nike', sub:'jordan', name:'Air Jordan 1 Low Royal Toe', cover:'img/products/jordanport.png', price:649.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/jordanlow.png','img/products/jordanlow2.png','img/products/jordanlow3.png','img/tenis/jordan1-chicago-traseira.jpg'] },
@@ -1206,11 +1279,104 @@ function closeAboutModalOnBackdrop(event) {
       { id:'forum-4', brand:'adidas', sub:'forum', name:'adidas Forum 84 Low Branch Brown', cover:'img/products/fr3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr3.png','img/products/fr31.png','img/products/fr32.png'] },
       { id:'forum-5', brand:'adidas', sub:'forum', name:'Tênis Bad Bunny x adidas Forum Buckle Low White', cover:'img/products/fr4port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr4.png','img/products/fr41.png','img/products/fr42.png'] },
       { id:'forum-6', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/fr5port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr5.png','img/products/fr51.png','img/products/fr52.png'] },
+      //550's//
+      { id:'nb-1', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nbport.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb.png','img/products/nb1.png','img/products/nb2.png'] },
+      { id:'nb-2', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb1port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb11.png','img/products/nb12.png','img/products/nb13.png'] },
+      { id:'nb-3', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb2port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb21.png','img/products/nb22.png','img/products/nb23.png'] },
+      { id:'nb-4', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb3port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb3.png','img/products/nb31.png','img/products/nb32.png'] },
+      { id:'nb-5', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb4port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb4.jpg','img/products/nb41.jpg','img/products/nb42.jpg'] },
+      { id:'nb-6', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb5port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb5.png','img/products/nb51.png','img/products/nb52.png'] },
+      { id:'nb-7', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb6port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb6.png','img/products/nb61.png','img/products/nb62.png'] },
+      { id:'nb-8', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb7port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb7.png','img/products/nb71.png','img/products/nb72.png'] },
+      { id:'nb-9', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb8port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb8.png','img/products/nb81.png','img/products/nb82.png'] },
+      { id:'nb-10', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb9port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb9.jpg','img/products/nb91.jpg','img/products/nb92.jpg'] },
+      //9060's//
+      { id:'nb-11', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/nw1port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nw1.jpg','img/products/nw2.jpg','img/products/nw3.jpg'] },
+      { id:'nb-12', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n1port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n1.jpg','img/products/n12.jpg','img/products/n12.jpg'] },
+      { id:'nb-13', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n2port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n2.jpg','img/products/n21.jpg','img/products/n22.jpg'] },
+      { id:'nb-14', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n3port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n3.jpg','img/products/n31.jpg','img/products/n32.jpg'] },
+      { id:'nb-15', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n4port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n4.jpg','img/products/n41.jpg','img/products/n42.jpg'] },
+      { id:'nb-16', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n5port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n5.jpg','img/products/n51.jpg','img/products/n52.jpg'] },
+      { id:'nb-17', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n6port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n6.jpg','img/products/n61.jpg','img/products/n62.jpg'] },
+      { id:'nb-18', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n7port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n7.jpg','img/products/n71.jpg','img/products/n72.jpg'] },
+      { id:'nb-19', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n8port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n8.jpg','img/products/n81.jpg','img/products/n82.jpg'] },
+      { id:'nb-20', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n9port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n9.jpg','img/products/n91.jpg','img/products/n92.jpg'] },
+      { id:'nb-21', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n10port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n10.jpg','img/products/n101.jpg','img/products/n102.jpg'] },
+      { id:'nb-22', brand:'new-balance', sub:'9060', name:'New Balance 550 White Green', cover:'img/products/n11port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/n11.jpg','img/products/n111.jpg','img/products/n112.jpg'] },
+      //BAPESTA'S//
+      { id:'bape-1', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b1port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b1.jpg','img/products/b11.jpg','img/products/b12.jpg'] },
+      { id:'bape-2', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b2port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b2.jpg','img/products/b21.jpg','img/products/b22.jpg'] },
+      { id:'bape-3', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b3port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b3.jpg','img/products/b31.jpg','img/products/b32.jpg'] },
+      { id:'bape-4', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b4port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b4.jpg','img/products/b41.jpg','img/products/b42.jpg'] },
+      { id:'bape-5', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b5port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b5.jpg','img/products/b51.jpg','img/products/b52.jpg'] },
+      { id:'bape-6', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b6port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b6.jpg','img/products/b61.jpg','img/products/b62.jpg'] },
+      { id:'bape-7', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b7port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b7.jpg','img/products/b71.jpg','img/products/b72.jpg'] },
+      { id:'bape-8', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b8port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b8.jpg','img/products/b81.jpg','img/products/b82.jpg'] },
+      { id:'bape-9', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b9port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b9.jpg','img/products/b91.jpg','img/products/b92.jpg'] },
+      { id:'bape-10', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/b10port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/b10.jpg','img/products/b101.jpg','img/products/b102.jpg'] },
+      { id:'bape-11', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp1port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp1.jpg','img/products/bp11.jpg','img/products/bp12.jpg'] },
+      { id:'bape-12', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp2port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp2.jpg','img/products/bp21.jpg','img/products/bp22.jpg'] },
+      { id:'bape-13', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp3port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp3.jpg','img/products/bp31.jpg','img/products/bp32.jpg'] },
+      { id:'bape-14', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp4port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp4.jpg','img/products/bp41.jpg','img/products/bp42.jpg'] },
+      { id:'bape-15', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp5port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp5.jpg','img/products/bp51.jpg','img/products/bp52.jpg'] },
+      { id:'bape-16', brand:'bape', sub:'sta', name:'Bape Sta Black', cover:'img/products/bp6port.png', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/products/bp6.jpg','img/products/bp61.jpg','img/products/bp62.jpg'] },
+      //SUEDE'S//
+      { id:'puma-1', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P1port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p1.jpg','img/products/p11.jpg','img/products/p12.jpg'] },
+      { id:'puma-2', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P2port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p2.jpg','img/products/p21.jpg','img/products/p22.jpg'] },
+      { id:'puma-3', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P3port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p3.jpg','img/products/p31.jpg','img/products/p32.jpg'] },
+      { id:'puma-4', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P4port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p4.jpg','img/products/p41.jpg','img/products/p42.jpg'] },
+      { id:'puma-5', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P5port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p5.jpg','img/products/p51.jpg','img/products/p52.jpg'] },
+      { id:'puma-6', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P6port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p6.jpg','img/products/p61.jpg','img/products/p62.jpg'] },
+      { id:'puma-7', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P7port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p7.jpg','img/products/p71.jpg','img/products/p72.jpg'] },
+      { id:'puma-8', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P8port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p8.jpg','img/products/p81.jpg','img/products/p82.jpg'] },
+      { id:'puma-8', brand:'puma', sub:'suede', name:'Puma Suede Classic', cover:'img/products/P8port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/p8.jpg','img/products/p81.jpg','img/products/p82.jpg'] },
+      //LEFRANCE'S//
+      { id:'puma-9', brand:'puma', sub:'LeFrance', name:'Puma Suede Classic', cover:'img/products/l1port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/l1.jpg','img/products/l11.jpg','img/products/l12.jpg'] },
+      { id:'puma-10', brand:'puma', sub:'LeFrance', name:'Puma Suede Classic', cover:'img/products/l2port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/l2.jpg','img/products/l21.jpg','img/products/l22.jpg'] },
+      { id:'puma-11', brand:'puma', sub:'LeFrance', name:'Puma Suede Classic', cover:'img/products/l3port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/l3.jpg','img/products/l31.jpg','img/products/l32.jpg'] },
+      { id:'puma-12', brand:'puma', sub:'LeFrance', name:'Puma Suede Classic', cover:'img/products/l4port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/l4.jpg','img/products/l41.jpg','img/products/l42.jpg'] },
+      { id:'puma-13', brand:'puma', sub:'LeFrance', name:'Puma Suede Classic', cover:'img/products/l5port.png', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/l5.jpg','img/products/l51.jpg','img/products/l51.jpg'] },
+      //B22'S//
+      { id:'dior-1', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d1port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d1.jpg','img/products/d11.jpg','img/products/d12.jpg'] },
+      { id:'dior-2', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d2port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d2.jpg','img/products/d21.jpg','img/products/d22.jpg'] },
+      { id:'dior-3', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d3port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d3.jpg','img/products/d31.jpg','img/products/d32.jpg'] },
+      { id:'dior-4', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d4port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d4.jpg','img/products/d41.jpg','img/products/d42.jpg'] },
+      { id:'dior-5', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d5port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d5.jpg','img/products/d51.jpg','img/products/d52.jpg'] },
+      { id:'dior-6', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d6port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d6.jpg','img/products/d61.jpg','img/products/d62.jpg'] },
+      { id:'dior-7', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d7port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d7.jpg','img/products/d71.jpg','img/products/d72.jpg'] },
+      { id:'dior-8', brand:'dior', sub:'b22', name:'Converse Chuck 70', cover:'img/products/d8port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/d8.jpg','img/products/d81.jpg','img/products/d82.jpg'] },
+      //B30'S//
+      { id:'dior-9', brand:'dior', sub:'b30', name:'Converse Chuck 70', cover:'img/products/di1port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/di1.jpg','img/products/di11.jpg','img/products/di12.jpg'] },
+      { id:'dior-10', brand:'dior', sub:'b30', name:'Converse Chuck 70', cover:'img/products/di2port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/di2.jpg','img/products/di21.jpg','img/products/di22.jpg'] },
+      { id:'dior-11', brand:'dior', sub:'b30', name:'Converse Chuck 70', cover:'img/products/di3port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/di3.jpg','img/products/di31.jpg','img/products/di32.jpg'] },
+      //TRAINER'S//
+      { id:'lv-1', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t1port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t1.jpg','img/products/t11.jpg','img/products/t12.jpg'] },
+      { id:'lv-2', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t2port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t2.jpg','img/products/t21.jpg','img/products/t22.jpg'] },
+      { id:'lv-3', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t3port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t3.jpg','img/products/t31.jpg','img/products/t32.jpg'] },
+      { id:'lv-4', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t4port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t4.jpg','img/products/t41.jpg','img/products/t42.jpg'] },
+      { id:'lv-5', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t5port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t5.jpg','img/products/t51.jpg','img/products/t52.jpg'] },
+      { id:'lv-6', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t6port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t6.jpg','img/products/t61.jpg','img/products/t62.jpg'] },
+      { id:'lv-7', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t7port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t7.jpg','img/products/t71.jpg','img/products/t72.jpg'] },
+      { id:'lv-8', brand:'louis vuitton', sub:'lv trainer', name:'Converse Chuck 70', cover:'img/products/t8port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/t8.jpg','img/products/t81.jpg','img/products/t82.jpg'] },
+      //SKATE'S//
+      { id:'lv-9', brand:'louis vuitton', sub:'lv skate', name:'Converse Chuck 70', cover:'img/products/s1port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/s1.jpg','img/products/s11.jpg','img/products/s12.jpg'] },
+      { id:'lv-10', brand:'louis vuitton', sub:'lv skate', name:'Converse Chuck 70', cover:'img/products/s2port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/s2.jpg','img/products/s21.jpg','img/products/s22.jpg'] },
+      { id:'lv-11', brand:'louis vuitton', sub:'lv skate', name:'Converse Chuck 70', cover:'img/products/s3port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/s3.jpg','img/products/s31.jpg','img/products/s32.jpg'] },
+      { id:'lv-12', brand:'louis vuitton', sub:'lv skate', name:'Converse Chuck 70', cover:'img/products/s4port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/s4.jpg','img/products/s41.jpg','img/products/s42.jpg'] },
+      //ALEXANDER'S//
+      { id:'alex-1', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a1port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a1.jpg','img/products/a11.jpg','img/products/a12.jpg'] },
+      { id:'alex-2', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a2port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a2.jpg','img/products/a21.jpg','img/products/a22.jpg'] },
+      { id:'alex-3', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a3port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a3.jpg','img/products/a31.jpg','img/products/a32.jpg'] },
+      { id:'alex-4', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a4port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a4.jpg','img/products/a41.jpg','img/products/a42.jpg'] },
+      { id:'alex-5', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a5port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a5.jpg','img/products/a51.jpg','img/products/a52.jpg'] },
+      { id:'alex-6', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a6port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a6.jpg','img/products/a61.jpg','img/products/a62.jpg'] },
+      { id:'alex-7', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a7port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a7.jpg','img/products/a71.jpg','img/products/a72.jpg'] },
+      { id:'alex-8', brand:'alexander mcqueen', sub:'alexander mcqueen', name:'Converse Chuck 70', cover:'img/products/a8port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a8.jpg','img/products/a81.jpg','img/products/a82.jpg'] },
 
-      { id:'nb550', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/nb550-main.jpg','img/tenis/nb550-lateral.jpg','img/tenis/nb550-traseira.jpg'] },
-      { id:'bapesta', brand:'bape', sub:'sta', name:'Bape Sta Black', price:1599.90, sizes:[38,39,40,41,42,43], photos:['img/tenis/bapesta-main.jpg','img/tenis/bapesta-lateral.jpg','img/tenis/bapesta-sola.jpg'] },
-      { id:'puma-suede', brand:'puma', sub:'suede', name:'Puma Suede Classic', price:529.90, sizes:[38,39,40,41,42,43,44], photos:['img/tenis/puma-suede-main.jpg','img/tenis/puma-suede-lateral.jpg','img/tenis/puma-suede-sola.jpg'] },
-      { id:'chuck70', brand:'converse', sub:'chuck', name:'Converse Chuck 70', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/tenis/chuck70-main.jpg','img/tenis/chuck70-lateral.jpg','img/tenis/chuck70-sola.jpg'] }
+      { id:'off-1', brand:'off white', sub:'off white', name:'Converse Chuck 70', cover:'img/products/a8port.png', price:499.90, sizes:[37,38,39,40,41,42,43,44], photos:['img/products/a8.jpg','img/products/a81.jpg','img/products/a82.jpg'] },
+
+
+
     ];
     let state = { view:'brands', brand:null, sub:null, product:null, photo:0, size:null };
     const money = value => value.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
@@ -1482,6 +1648,23 @@ document.addEventListener('keydown', event => {
   if (document.querySelector('#product-modal').classList.contains('open') && event.key === 'ArrowLeft') changePhoto(-1);
   if (document.querySelector('#product-modal').classList.contains('open') && event.key === 'ArrowRight') changePhoto(1);
 });
+
+// Alternador da Barra de Anúncios Top Bar
+function initTopBarSlider() {
+  const announcements = document.querySelectorAll('.announcement');
+  if (announcements.length === 0) return;
+  
+  let currentIndex = 0;
+
+  setInterval(() => {
+    announcements[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % announcements.length;
+    announcements[currentIndex].classList.add('active');
+  }, 3500); // Alterna a cada 3.5 segundos
+}
+
+// Inicializa após o carregamento da página
+document.addEventListener('DOMContentLoaded', initTopBarSlider);
   </script>
 </body>
 </html>
