@@ -12,6 +12,79 @@
     :root { --black:#0D0D0D; --red:#E50914; --white:#FFF; --gray:#CCC; --panel:rgba(18, 18, 18, 0.75); --line:rgba(255, 255, 255, 0.12); --street:'Montserrat',Arial,sans-serif; }
     * { box-sizing:border-box; }
 
+/* Container Externo com Margens e Centralizado */
+.banner-carousel-container {
+  max-width: 1200px; /* Largura máxima do banner */
+  width: 92%; /* Distância das bordas em telas menores */
+  margin: 20px auto 30px auto; /* Espaçamento: Topo, Laterais (Auto), Baixo */
+  position: relative;
+  border-radius: 12px; /* Bordas Arredondadas */
+  overflow: hidden; /* Corta as imagens nas pontas arredondadas */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra suave */
+}
+
+/* Container da Trilha */
+.carousel-track-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide a {
+  width: 100%;
+  display: block;
+}
+
+/* Imagem Ajustada e Proporcional */
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* Mantém a imagem completa sem cortar */
+  border-radius: 12px;
+}
+
+/* Botões de Navegação Ajustados */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 50%; /* Botões redondos */
+  transition: all 0.3s ease;
+}
+
+.prev-btn {
+  left: 15px;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 69, 0, 0.8); /* Cor do fogo ao passar o mouse */
+  color: #ffffff;
+}
+
    /* Top Bar */
 .top-bar {
   background-color: #0d0d0d;
@@ -929,6 +1002,24 @@ button.size-guide-btn:hover {
 </div>
 
   </header>
+
+<div class="banner-carousel-container">
+  <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+  
+  <div class="carousel-track-container">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <a href="#"><img src="img/headers/head1.jpg" alt="Banner 1"></a>
+      </div>
+      <div class="carousel-slide">
+        <a href="#"><img src="img/headers/head2.jpg" alt="Banner 2"></a>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+</div>
+
   <main>
     <h1 id="page-title">Encontre seu flame</h1>
     <p class="intro" id="page-intro">Selecione uma marca e navegue pelas linhas disponíveis.</p>
@@ -1165,7 +1256,8 @@ function closeAboutModalOnBackdrop(event) {
       
       { id:'adidas', name:'Adidas', cover:'img/brands/adidas-port.png', subs:[
         { id:'samba', name:'Samba', cover:'img/sub-brands/samba.png' },
-        { id:'forum', name:'Forum', cover:'img/sub-brands/FORUM.png' }]},
+        { id:'forum', name:'Forum', cover:'img/sub-brands/FORUM.png' },
+        { id:'pharrell williams', name:'pharrell williams', cover:'img/sub-brands/pr-port.png' }]},
 
       { id:'new-balance', name:'New Balance', cover:'img/brands/nb-port.png', subs:[
         { id:'550', name:'550', cover:'img/brands/nb-port.png' }, 
@@ -1279,6 +1371,19 @@ function closeAboutModalOnBackdrop(event) {
       { id:'forum-4', brand:'adidas', sub:'forum', name:'adidas Forum 84 Low Branch Brown', cover:'img/products/fr3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr3.png','img/products/fr31.png','img/products/fr32.png'] },
       { id:'forum-5', brand:'adidas', sub:'forum', name:'Tênis Bad Bunny x adidas Forum Buckle Low White', cover:'img/products/fr4port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr4.png','img/products/fr41.png','img/products/fr42.png'] },
       { id:'forum-6', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/fr5port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/fr5.png','img/products/fr51.png','img/products/fr52.png'] },
+      { id:'forum-7', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/f1port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/f1.jpg','img/products/f11.jpg','img/products/f12.jpg'] },
+      { id:'forum-8', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/f2port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/f2.jpg','img/products/f21.jpg','img/products/f22.jpg'] },
+      { id:'forum-9', brand:'adidas', sub:'forum', name:'Adidas Tenis Forum Low', cover:'img/products/f3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/f3.jpg','img/products/f31.jpg','img/products/f32.jpg'] },
+      //PHARREL WILLIAMS//
+      { id:'pharrel-1', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w1port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w1.jpg','img/products/w11.jpg','img/products/w12.jpg'] },
+      { id:'pharrel-2', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w2port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w2.jpg','img/products/w21.jpg','img/products/w22.jpg'] },
+      { id:'pharrel-3', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w3port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w3.jpg','img/products/w31.jpg','img/products/w32.jpg'] },
+      { id:'pharrel-4', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w4port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w4.jpg','img/products/w41.jpg','img/products/w42.jpg'] },
+      { id:'pharrel-5', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w5port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w5.jpg','img/products/w51.jpg','img/products/w52.jpg'] },
+      { id:'pharrel-6', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w6port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w6.jpg','img/products/w61.jpg','img/products/w62.jpg'] },
+      { id:'pharrel-7', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w7port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w7.jpg','img/products/w71.jpg','img/products/w72.jpg'] },
+      { id:'pharrel-8', brand:'adidas', sub:'pharrell williams', name:'Adidas Tenis Forum Low', cover:'img/products/w8port.png', price:799.90, sizes:[37,38,39,40,41,42,43], photos:['img/products/w8.jpg','img/products/w81.jpg','img/products/w82.jpg'] },
+
       //550's//
       { id:'nb-1', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nbport.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb.png','img/products/nb1.png','img/products/nb2.png'] },
       { id:'nb-2', brand:'new-balance', sub:'550', name:'New Balance 550 White Green', cover:'img/products/nb1port.png', price:1099.90, sizes:[38,39,40,41,42,43,44], photos:['img/products/nb11.png','img/products/nb12.png','img/products/nb13.png'] },
@@ -1665,6 +1770,30 @@ function initTopBarSlider() {
 
 // Inicializa após o carregamento da página
 document.addEventListener('DOMContentLoaded', initTopBarSlider);
+
+let currentIndex = 0;
+const track = document.getElementById('carouselTrack');
+const slides = document.querySelectorAll('.carousel-slide');
+const totalSlides = slides.length;
+
+function updateCarousel() {
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function moveSlide(direction) {
+  currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+  updateCarousel();
+}
+
+// Troca de imagem automática a cada 4 segundos
+let autoSlide = setInterval(() => moveSlide(1), 6000);
+
+// Pausa o carrosel quando o usuário passa o mouse por cima
+const carouselContainer = document.querySelector('.top-bar-carousel');
+carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+carouselContainer.addEventListener('mouseleave', () => {
+  autoSlide = setInterval(() => moveSlide(1), 4000);
+});
   </script>
 </body>
 </html>
